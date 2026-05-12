@@ -1,0 +1,1 @@
+.footer{position:fixed;bottom:0;width:100%;background:var(--page-bg);border-top:1px solid var(--border);color:var(--text-2);text-align:center;font-size:12px;overflow:hidden;z-index:2}.footer-copyright{padding:.65rem!important}@media screen and (max-height:450px){.footer{display:none}}

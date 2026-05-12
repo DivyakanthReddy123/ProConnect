@@ -1,0 +1,80 @@
+<app-navbar></app-navbar>
+<div class="container jobs-shell" id="jobCards">
+  <div class="page-header">
+    <div>
+      <h1>Jobs</h1>
+      <p class="muted">Discover roles or manage your recruiter workspace.</p>
+    </div>
+  </div>
+
+  <div class="jobs-grid">
+    <aside>
+      <div class="card mb-3">
+        <div class="card-body">
+          <div *ngIf="isRecruiter()">
+            <h5>Recruiter workspace</h5>
+            <p class="text-muted">Post jobs and manage applicants from your dashboard.</p>
+            <button class="btn btn-primary w-100 mb-2" routerLink="/recruiter/post-job">Post New Job</button>
+            <button class="btn btn-outline-primary w-100" routerLink="/recruiter/dashboard">Dashboard</button>
+          </div>
+          <div *ngIf="!isRecruiter()">
+            <h5>Find your next role</h5>
+            <p class="text-muted mb-0">Browse jobs posted by recruiters and apply directly.</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <div class="filter-bar">
+        <button type="button" class="filter-chip" [class.active]="activeFilter === 'all'" (click)="setFilter('all')">All</button>
+        <button type="button" class="filter-chip" [class.active]="activeFilter === 'internship'" (click)="setFilter('internship')">Internships</button>
+        <button type="button" class="filter-chip" [class.active]="activeFilter === 'full-time'" (click)="setFilter('full-time')">Full-time</button>
+        <button type="button" class="filter-chip" [class.active]="activeFilter === 'research'" (click)="setFilter('research')">Research</button>
+        <button type="button" class="filter-chip" [class.active]="activeFilter === 'volunteer'" (click)="setFilter('volunteer')">Volunteer</button>
+        <span class="ms-auto text-muted" *ngIf="allJobs.length!=0">Sort by:</span>
+        <mat-radio-group *ngIf="allJobs.length!=0" aria-label="Select sort" name="radioprivacy" [(ngModel)]="sortType" required>
+          <mat-radio-button (click)="changeSort(0)" [value]="0" class="me-2">Date created</mat-radio-button>
+          <mat-radio-button (click)="changeSort(1)" [value]="1">Relevant</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <app-empty-state *ngIf="jobs.length==0" title="No jobs match your filters" message="Try clearing filters or check again after recruiters post new roles." cta="Clear filters"></app-empty-state>
+      <div *ngIf="jobs.length==0" class="text-center"><button type="button" class="btn btn-outline-primary btn-sm" (click)="clearFilters()">Clear filters</button></div>
+
+      <ng-container *ngFor="let job of jobs">
+        <div *ngIf="usersJob(job) && sortType==0" class="card job-card-modern">
+          <div class="job-logo">{{(job.title || 'J').charAt(0)}}</div>
+          <div class="job-main">
+            <h3>{{job.title}}</h3>
+            <div class="job-meta">Published by You · {{job.timestamp | date:'d MMM y, h:mm a'}}</div>
+            <p class="mt-3">{{job.description}}</p>
+            <span class="chip">{{job.usersApplied.length}} applicants</span>
+            <span class="chip" *ngIf="job.jobType">{{job.jobType}}</span>
+          </div>
+          <div class="job-actions">
+            <button class="bookmark-btn" aria-label="Save job"><i class="far fa-bookmark"></i></button>
+            <button class="btn btn-outline-primary" routerLink="/recruiter/jobs">View applicants</button>
+          </div>
+        </div>
+
+        <div *ngIf="!usersJob(job)" class="card job-card-modern">
+          <div class="job-logo">{{(job.userMadeBy?.currentCompany || job.title || 'J').charAt(0)}}</div>
+          <div class="job-main">
+            <h3>{{job.title}}</h3>
+            <div class="job-meta">{{job.userMadeBy?.currentCompany || job.companyName || 'Company'}} · {{job.userMadeBy?.name}} {{job.userMadeBy?.surname}} · {{job.timestamp | date:'d MMM y, h:mm a'}}</div>
+            <p class="mt-3">{{job.description}}</p>
+            <span class="chip">{{job.usersApplied.length}} applicants</span>
+            <span class="chip" *ngIf="job.jobType">{{job.jobType}}</span>
+          </div>
+          <div class="job-actions">
+            <button class="bookmark-btn" aria-label="Save job"><i class="far fa-bookmark"></i></button>
+            <button *ngIf="!alreadyApplied(job)" type="button" (click)="newApplication(job.id)" class="btn btn-primary"><i class="fas fa-plus"></i> Apply</button>
+            <button *ngIf="alreadyApplied(job)" disabled type="button" class="btn btn-outline-primary"><i class="fas fa-check"></i> Applied</button>
+          </div>
+        </div>
+      </ng-container>
+    </main>
+  </div>
+</div>
+<app-footer></app-footer>

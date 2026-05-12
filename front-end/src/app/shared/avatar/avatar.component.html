@@ -1,0 +1,1 @@
+<img *ngIf="src" [src]="src" class="app-avatar" [style.width.px]="size" [style.height.px]="size" [alt]="name || 'User avatar'"><div *ngIf="!src" class="app-avatar app-avatar-fallback" [style.width.px]="size" [style.height.px]="size" [style.background]="bg" [style.fontSize.px]="size / 2.6">{{ initials }}</div>

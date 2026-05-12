@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <div class="container nav-shell">
+    <a routerLink="/feed" class="navbar-brand proconnect-brand" aria-label="ProConnect home">
+      <img class="brand-icon" src="../../../assets/images/small-logo.png" alt="ProConnect logo">
+      <span class="brand-text">ProConnect</span>
+    </a>
+
+    <form class="nav-search" (ngSubmit)="submitSearch()" role="search">
+      <input
+        type="search"
+        name="globalSearch"
+        [(ngModel)]="searchTerm"
+        placeholder="Search"
+        aria-label="Search people"
+      />
+      <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+    </form>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link active d-flex flex-column text-center" routerLink="/feed"><i class="fas fa-home"></i><span class="small">Home</span></a></li>
+        <li class="nav-item"><a class="nav-link d-flex flex-column text-center" routerLink="/network"><i class="fas fa-user-friends"></i><span class="small">My Network</span></a></li>
+        <li class="nav-item"><a class="nav-link d-flex flex-column text-center" routerLink="/jobs"><i class="fas fa-briefcase"></i><span class="small">Jobs</span></a></li>
+        <li class="nav-item" *ngIf="isRecruiter()"><a class="nav-link d-flex flex-column text-center" routerLink="/recruiter/dashboard"><i class="fas fa-building"></i><span class="small">Recruiter</span></a></li>
+        <li class="nav-item"><a class="nav-link d-flex flex-column text-center" routerLink="/messaging"><i class="fas fa-comment-dots"></i><span class="small">Messaging</span></a></li>
+        <li class="nav-item"><a class="nav-link d-flex flex-column text-center" routerLink="/notifications"><i class="fas fa-bell"></i><span class="small">Notifications</span></a></li>
+        <li class="nav-item text-center">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn p-1" id="dropdownBasic1" ngbDropdownToggle aria-label="Open account menu">
+              <app-avatar [src]="user.profilePicture ? displayProfilePhoto() : null" [name]="user.name + ' ' + user.surname" [size]="36"></app-avatar>
+            </button>
+            <div ngbDropdownMenu id="mydropdown">
+              <button ngbDropdownItem *ngIf="userDetails" type="button" class="btn" (click)="goToProfile()">Profile</button>
+              <button ngbDropdownItem><a routerLink="/settings" id="set-btn">Settings</a></button>
+              <button ngbDropdownItem (click)="logout()">Logout</button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

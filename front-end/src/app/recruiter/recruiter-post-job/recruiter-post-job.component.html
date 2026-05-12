@@ -1,0 +1,25 @@
+<app-navbar></app-navbar>
+<div class="container recruiter-shell">
+  <div class="card form-card p-4">
+    <h1>Post a Job</h1>
+    <p class="muted">Create a detailed job post that job seekers can apply to.</p>
+    <form #jobForm="ngForm" (ngSubmit)="submit(jobForm)">
+      <div class="row">
+        <div class="col-md-6 mb-3"><label>Job title</label><input class="form-control" name="title" [(ngModel)]="job.title" required></div>
+        <div class="col-md-6 mb-3"><label>Company name</label><input class="form-control" name="companyName" [(ngModel)]="job.companyName" required></div>
+        <div class="col-md-6 mb-3"><label>Location</label><input class="form-control" name="location" [(ngModel)]="job.location" required></div>
+        <div class="col-md-3 mb-3"><label>Job type</label><select class="form-control" name="jobType" [(ngModel)]="job.jobType"><option>Full-time</option><option>Internship</option><option>Part-time</option><option>Contract</option></select></div>
+        <div class="col-md-3 mb-3"><label>Work mode</label><select class="form-control" name="workMode" [(ngModel)]="job.workMode"><option>Remote</option><option>Hybrid</option><option>Onsite</option></select></div>
+        <div class="col-md-4 mb-3"><label>Experience required</label><input class="form-control" name="experienceRequired" [(ngModel)]="job.experienceRequired" placeholder="0-2 years"></div>
+        <div class="col-md-4 mb-3"><label>Salary / stipend</label><input class="form-control" name="salary" [(ngModel)]="job.salary" placeholder="$80k - $120k"></div>
+        <div class="col-md-4 mb-3"><label>Openings</label><input class="form-control" type="number" name="numberOfOpenings" [(ngModel)]="job.numberOfOpenings"></div>
+        <div class="col-md-6 mb-3"><label>Application deadline</label><input class="form-control" type="date" name="applicationDeadline" [(ngModel)]="job.applicationDeadline"></div>
+        <div class="col-md-6 mb-3"><label>Skills required</label><input class="form-control" name="skillsRequired" [(ngModel)]="job.skillsRequired" placeholder="Java, Spring Boot, Angular"></div>
+        <div class="col-12 mb-3"><label>Job description</label><textarea class="form-control" rows="6" name="description" [(ngModel)]="job.description" required></textarea></div>
+      </div>
+      <button class="btn btn-primary" type="submit">Publish Job</button>
+      <button class="btn btn-outline-secondary ms-2" type="button" routerLink="/recruiter/dashboard">Cancel</button>
+    </form>
+  </div>
+</div>
+<app-footer></app-footer>

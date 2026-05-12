@@ -1,0 +1,21 @@
+<app-navbar></app-navbar>
+<div class="container recruiter-shell">
+  <div class="card form-card p-4">
+    <h1>Company / Recruiter Profile</h1>
+    <p class="muted">These details are shown on your job posts and recruiter workspace.</p>
+    <div *ngIf="saved" class="alert alert-success">Profile updated successfully.</div>
+    <form #profileForm="ngForm" (ngSubmit)="save()">
+      <div class="row">
+        <div class="col-md-6 mb-3"><label>Recruiter designation</label><input class="form-control" name="currentJob" [(ngModel)]="user.currentJob"></div>
+        <div class="col-md-6 mb-3"><label>Company name</label><input class="form-control" name="currentCompany" [(ngModel)]="user.currentCompany"></div>
+        <div class="col-md-6 mb-3"><label>Company location</label><input class="form-control" name="city" [(ngModel)]="user.city"></div>
+        <div class="col-md-6 mb-3"><label>Company website</label><input class="form-control" name="website" [(ngModel)]="user.website"></div>
+        <div class="col-md-6 mb-3"><label>Professional profile / company page</label><input class="form-control" name="twitter" [(ngModel)]="user.twitter"></div>
+        <div class="col-md-6 mb-3"><label>Hiring domain / industry</label><input class="form-control" name="github" [(ngModel)]="user.github"></div>
+      </div>
+      <button class="btn btn-primary" type="submit">Save Profile</button>
+      <button class="btn btn-outline-secondary ms-2" type="button" routerLink="/recruiter/dashboard">Back</button>
+    </form>
+  </div>
+</div>
+<app-footer></app-footer>

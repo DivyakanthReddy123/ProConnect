@@ -1,0 +1,45 @@
+#feedcards{
+    margin-top: 8%;
+    width: 100%;
+}
+
+#profileCard{
+    width: 80%;
+    font-family: Inter, Arial, sans-serif;
+}
+
+#networkCard{
+    width: 80%;
+    font-family: Inter, Arial, sans-serif;
+    margin-top:5%;
+}
+
+#diversCard {
+    margin-left: 20%;
+}
+
+#profile-image{
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 5%;
+  display: inline-block;
+}
+
+#allPosts{
+    margin-bottom: 15%;
+    /* padding-left: 2%; */
+
+}
+
+.profile-btn{
+    background-color: var(--primary);
+    color: white;
+}
+
+#postCard{
+    background-color: white;
+}
+
+

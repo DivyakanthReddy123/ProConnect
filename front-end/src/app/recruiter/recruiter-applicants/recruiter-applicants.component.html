@@ -1,0 +1,19 @@
+<app-navbar></app-navbar>
+<div class="container recruiter-shell">
+  <div class="mb-4"><h1>Applicants</h1><p class="muted">Review candidates who applied for this job.</p></div>
+  <div *ngIf="applicants.length === 0" class="card p-4 text-center text-muted">No applicants yet.</div>
+  <div *ngFor="let candidate of applicants" class="card action-card p-4 mb-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <h3>{{candidate.name}} {{candidate.surname}}</h3>
+        <p class="muted mb-1">{{candidate.currentJob || 'Candidate'}} · {{candidate.currentCompany || 'Company not added'}} · {{candidate.city || 'Location not added'}}</p>
+        <span class="pill" *ngIf="candidate.skills && candidate.skills.length">Skills added</span>
+      </div>
+      <div>
+        <button class="btn btn-outline-primary me-2" [routerLink]="['/users', candidate.id]">View Profile</button>
+        <button class="btn btn-primary" [routerLink]="['/messaging', candidate.id]">Message</button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

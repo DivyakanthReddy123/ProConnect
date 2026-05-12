@@ -1,0 +1,79 @@
+<app-navbar></app-navbar>
+
+<div class="container network-page">
+  <div class="network-search-wrap">
+    <div class="input-group network-search-box">
+      <input type="text" (keydown.enter)="search()" [(ngModel)]="userQuery" class="form-control search-area" placeholder="Search network" />
+      <button [disabled]="!userQuery" class="btn search-button" type="button" (click)="search()" aria-label="Search network">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+  </div>
+
+  <section *ngIf="searchResults.length != 0" class="network-section">
+    <div class="page-header centered-header">
+      <div>
+        <h1>Search results</h1>
+        <p class="muted">People matching your search.</p>
+      </div>
+    </div>
+
+    <div class="people-grid">
+      <div *ngFor="let user of searchResults | slice : startPage:paginationLimit" class="card people-card-clean">
+        <button type="button" class="avatar-button" (click)="goToProfile(user)" aria-label="Open profile">
+          <app-avatar [src]="user.profilePicture ? displayProfilePhoto(user) : null" [name]="user.name + ' ' + user.surname" [size]="72"></app-avatar>
+        </button>
+        <h3>{{user.name}} {{user.surname}}</h3>
+        <p class="muted role-line" *ngIf="user.currentJob">{{user.currentJob}} at {{user.currentCompany}}</p>
+        <p class="muted role-line" *ngIf="!user.currentJob">ProConnect member</p>
+
+        <div class="card-actions">
+          <button *ngIf="connected(user.id) && !hasRequestPending(user.id)" type="button" class="btn btn-outline-primary" disabled>
+            <i class="fas fa-check"></i> Connected
+          </button>
+          <button *ngIf="!connected(user.id) && !hasRequestPending(user.id)" (click)="addConnection(user)" type="button" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Connect
+          </button>
+          <button *ngIf="hasRequestPending(user.id)" type="button" class="btn btn-outline-primary" disabled>
+            <i class="fas fa-clock"></i> Pending
+          </button>
+          <button [routerLink]="['/users/',user.id]" type="button" class="btn btn-outline-primary">Show profile</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <button class="btn btn-outline-primary btn-sm" *ngIf="paginationLimit < searchResults.length" (click)="showMoreItems()">Show more</button>
+    </div>
+  </section>
+
+  <section class="network-section">
+    <div class="page-header centered-header">
+      <div>
+        <h1>Your network</h1>
+        <p class="muted">Your accepted connections are shown here.</p>
+      </div>
+    </div>
+
+    <app-empty-state *ngIf="network.length == 0" title="Build your network" message="Find people you know and start building your feed." cta="Find people you may know"></app-empty-state>
+
+    <div *ngIf="network.length" class="people-grid">
+      <div *ngFor="let user of network" class="card people-card-clean">
+        <button type="button" class="avatar-button" (click)="goToProfile(user)" aria-label="Open profile">
+          <app-avatar [src]="user.profilePicture ? displayProfilePhoto(user) : null" [name]="user.name + ' ' + user.surname" [size]="72"></app-avatar>
+        </button>
+        <h3>{{user.name}} {{user.surname}}</h3>
+        <p class="muted role-line" *ngIf="user.currentJob">{{user.currentJob}} at {{user.currentCompany}}</p>
+        <p class="muted role-line" *ngIf="!user.currentJob">Connection</p>
+        <p class="muted mutual-line">Mutual connections will appear here</p>
+
+        <div class="card-actions">
+          <button (click)="goToProfile(user)" type="button" class="btn btn-primary">Show profile</button>
+          <button (click)="startConversation(user)" type="button" class="btn btn-outline-primary">Message</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<app-footer></app-footer>
