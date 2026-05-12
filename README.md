@@ -51,48 +51,31 @@ __Back:__   ```JetBrains run``` ☑️
 
 ### Login page
 
-![alt text](readme-photos/login.JPG)  
+![alt text](readme-photos/login.png)  
 
---- 
-
-### Administrator's page
-
-![alt text](readme-photos/admin.JPG)  
 
 --- 
 
 ### Feed page
 
-![alt text](readme-photos/feed.JPG)  
+![alt text](readme-photos/feed.png)  
 
 --- 
 
 ### Profile page
 
-![alt text](readme-photos/profile.JPG)  
+![alt text](readme-photos/profile.png)  
 
 --- 
 ### Job page
 
-![alt text](readme-photos/jobs.JPG)  
+![alt text](readme-photos/jobs.png)  
 
---- 
-
-### Profile page
-
-![alt text](readme-photos/profile.JPG)  
-
---- 
+---
 
 ### Chat page
 
-![alt text](readme-photos/chat.JPG)  
-
---- 
-
-### Notifications page
-
-![alt text](readme-photos/notifications.JPG)  
+![alt text](readme-photos/chat.png)
 
 --- 
 
